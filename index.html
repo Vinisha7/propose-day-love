@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Propose Day ❤️</title>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500&display=swap" rel="stylesheet">
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Dancing Script', cursive;
+    background: #ffe6f0;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    position: relative;
+    color: #4b2e5f;
+  }
+
+  .letter-container {
+    background: #ffffffcc;
+    padding: 25px 30px;
+    border-radius: 20px;
+    max-width: 90%;
+    width: 600px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    text-align: left;
+    line-height: 1.6;
+    position: relative;
+    z-index: 2;
+    font-size: 18px;
+    display: none; /* Hidden until passcode is correct */
+    box-sizing: border-box;
+  }
+
+  .letter-container::before {
+    content: "💌";
+    font-size: 35px;
+    position: absolute;
+    top: -15px;
+    left: -15px;
+    z-index: 3;
+  }
+
+  .letter-container p {
+    margin: 12px 0;
+    word-wrap: break-word;
+  }
+
+  .signature {
+    margin-top: 25px;
+    text-align: right;
+    font-style: italic;
+  }
+
+  .propose-day-title {
+    font-size: 30px;
+    color: #ff1a75;
+    margin: 0 0 15px 0;
+    text-align: center;
+    word-wrap: break-word;
+  }
+
+  .passcode-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #ffffffee;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 5;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+
+  .passcode-overlay input {
+    width: 90%;
+    max-width: 300px;
+    padding: 10px 15px;
+    font-size: 16px;
+    border-radius: 10px;
+    border: 2px solid #ff1a75;
+    outline: none;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+  }
+
+  .passcode-overlay button {
+    width: 90%;
+    max-width: 300px;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 10px;
+    border: none;
+    background: #ff1a75;
+    color: white;
+    cursor: pointer;
+  }
+
+  .heart {
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    background: red;
+    transform: rotate(-45deg);
+    border-radius: 50% 50% 0 0;
+  }
+
+  .heart::before,
+  .heart::after {
+    content: "";
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    background: red;
+    border-radius: 50%;
+  }
+
+  .heart::before { top: -7px; left: 0; }
+  .heart::after { top: 0; left: 7px; }
+
+  @keyframes floatUp {
+    0% { transform: translateY(100vh) scale(0.4) rotate(0deg); opacity: 0; }
+    10% { opacity: 1; }
+    100% { transform: translateY(-50vh) scale(1) rotate(360deg); opacity: 0; }
+  }
+
+  /* Responsive adjustments */
+  @media screen and (max-width: 480px) {
+    .letter-container {
+      font-size: 16px;
+      padding: 20px;
+    }
+    .propose-day-title {
+      font-size: 24px;
+    }
+    .letter-container::before {
+      font-size: 30px;
+      top: -10px;
+      left: -10px;
+    }
+    .passcode-overlay input, .passcode-overlay button {
+      font-size: 14px;
+      padding: 8px 12px;
+    }
+    .heart {
+      width: 12px;
+      height: 12px;
+    }
+    .heart::before,
+    .heart::after {
+      width: 12px;
+      height: 12px;
+      top: -6px;
+      left: 6px;
+    }
+  }
+
+</style>
+</head>
+<body>
+
+<!-- Passcode overlay -->
+<div class="passcode-overlay" id="passcodeOverlay">
+  <input type="password" id="passcodeInput" placeholder="Enter passcode">
+  <button onclick="checkPasscode()">Unlock 💌</button>
+</div>
+
+<!-- Letter container -->
+<div class="letter-container" id="letterContainer">
+  <h3 class="propose-day-title">Happy Propose Day 💍</h3>
+
+  <p><b>Hey ❤️</b></p>
+
+  <p>Happy Propose Day! ❤️ Ela start cheyyalo kuda teliyatledhu… but here goes. You’ve become this little corner of my mind that I keep smiling at without even trying. I just wanted you to know how much I care and how much you mean to me. Every moment with you… they stay with me 💫.</p>
+
+  <p>I guess all I really want is for you to know that someone notices you, someone enjoys your company, someone smiles at your texts, someone remembers your jokes, and someone silently appreciates every little thing you do 🌸. That’s all this letter is—just a small way to tell you that someone thinks about you more than you might imagine 💕.</p>
+
+  <p>Will you take this small rose 🌹, and maybe this small part of my heart too? Even if you just smile at this message 😊, that’s enough for me… but I hope it makes you feel a little closer to me too 💌. I don’t know what the future holds, but I do know that having you in my thoughts makes everything feel special 💖.</p>
+
+  <p class="signature"><b>Yours nervously,<br>Vayyari 💌</b></p>
+
+  <!-- Audio -->
+  <audio id="bgMusic" loop>
+    <source src="song.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+</div>
+
+<script>
+  // Floating hearts
+  const colors = ['#ff4d94', '#ff66b3', '#ff99cc', '#ff1a75'];
+  for(let i=0; i<30; i++){
+    const heart = document.createElement('div');
+    heart.className = 'heart';
+    heart.style.left = Math.random() * 100 + 'vw';
+    heart.style.width = (10 + Math.random()*15) + 'px';
+    heart.style.height = heart.style.width;
+    const color = colors[Math.floor(Math.random()*colors.length)];
+    heart.style.background = color;
+    heart.style.animation = `floatUp ${5 + Math.random()*5}s linear infinite`;
+    heart.style.animationDelay = Math.random()*5 + 's';
+    document.body.appendChild(heart);
+  }
+
+  // Passcode logic
+  const correctPasscode = "vinisha"; // Change your passcode here
+  function checkPasscode() {
+    const input = document.getElementById('passcodeInput').value;
+    if(input === correctPasscode){
+      document.getElementById('passcodeOverlay').style.display = 'none';
+      document.getElementById('letterContainer').style.display = 'block';
+
+      // Play the mp3
+      const music = document.getElementById('bgMusic');
+      music.volume = 0.5; // soft volume
+      music.play();
+    } else {
+      alert("Incorrect passcode! 💔 Try again.");
+    }
+  }
+</script>
+
+</body>
+</html>
